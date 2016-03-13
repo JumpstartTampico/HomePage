@@ -1,20 +1,23 @@
 var express = require('express');
-var bodyParser = require('body-parser');
-var router = express.Router();
-var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME,process.env.SENDGRID_PASSWORD);
+var sendgrid = require('sendgrid')('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');
+var Hogan = require('hogan.js');
 var fs = require('fs');
-var template = fs.readFileSync('./ink/build/index.html','utf-8');
+var router = express.Router();
+var template = fs.readFileSync('./public/mails/git.hjs','utf-8');
+var compiledTemplate = Hogan.compile(template);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('email', { title: 'Registro de taller'});
 });
 router.post('/', function(req, res, next) {
+  // console.log("Nombre: "+ req.body.firstName)
+  // console.log("Email: " + req.body.email)
   sendgrid.send({
     to: req.body.email,
-    from: 'noreply@jumpstart.mx',
+    from: 'talleres@jumpstart.mx',
     subject: 'Talleres',
-    html: template
+    html: compiledTemplate.render({firstName: req.body.firstName})
   }, function(error, json){
     if (error) {return res.send('Error enviando email');}
     res.send('Email enviado');

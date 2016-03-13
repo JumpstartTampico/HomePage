@@ -6,12 +6,12 @@ html(lang="en")
     script(src="/javascripts/bootstrap.js")
     script(src="/javascripts/jquery.js")
     body
-      form.form-inline(action="/email",method="POST",)
-        .form-group
+      form.form-inline(action="/email", method="POST")
+        fieldset.form-group
           label(for="firstName") Nombre
-          input#firstName.form-control(type="text",placeholder="Nombre")
-        .form-group
+          input#firstName.form-control(name="firstName",type="text",placeholder="Nombre")
+        fielset.form-group
           label(for="email") Email
-          input#email.form-control(type="email", placeholder="Email")
+          input#email.form-control(name="email",type="email", placeholder="Email")
         button.btn.btn-default(type="submit") Submit
         
