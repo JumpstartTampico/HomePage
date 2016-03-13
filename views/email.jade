@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+  header
+    title= title
+    link(rel="stylesheet", href="/stylesheets/bootstrap.css")
+    script(src="/javascripts/bootstrap.js")
+    script(src="/javascripts/jquery.js")
+    body
+      form.form-inline(action="/email",method="POST",)
+        .form-group
+          label(for="firstName") Nombre
+          input#firstName.form-control(type="text",placeholder="Nombre")
+        .form-group
+          label(for="email") Email
+          input#email.form-control(type="email", placeholder="Email")
+        button.btn.btn-default(type="submit") Submit
+        
